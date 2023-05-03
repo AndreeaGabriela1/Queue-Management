@@ -1,0 +1,258 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": true,
+    "cutClient": false,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "BussinessLogic.SimulationManager",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_67388241 { 
+   	label=BussinessLogic
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   ConcreteStrategyQueue67388241[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ConcreteStrategyQueue</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addClient(queues: List&lt;Queues&gt;, c: Client)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ConcreteStrategyTime67388241[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ConcreteStrategyTime</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addClient(queues: List&lt;Queues&gt;, c: Client)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Scheduler67388241[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Scheduler</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   MaximumNumberOfQueues: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   queues: List&lt;Queues&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   strategy: Strategy [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ changeStrategy(policy: SelectionPolicy)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ dispatchClient(c: Client)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SelectionPolicy67388241[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(E)SelectionPolicy</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   SHORTEST_QUEUE: SelectionPolicy [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   SHORTEST_TIME: SelectionPolicy [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ valueOf(name: String): SelectionPolicy</TD></TR>
+<TR><TD ALIGN="LEFT" >+ values(): SelectionPolicy[]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#DCFBD5"
+];
+
+SimulationManager67388241[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SimulationManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   MaximumArrivalTime: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   MaximumServingTime: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   MinimumArrivalTime: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   MinimumServingTime: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   NumberOfClients: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   NumbersOfQueues: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   TimeLimit: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   frame: SimulationFrame [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   generatedClients: List&lt;Client&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   scheduler: Scheduler [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   selectionPolicy: SelectionPolicy [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- generateNRandomClients()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >+ run()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_70939 { 
+   	label=GUI
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   SimulationFrame70939[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SimulationFrame</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   maxArrivalTimeField: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   maxProcessingTimeField: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   minArrivalTimeField: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   minProcessingTimeField: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   numClientsField: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   numQueuesField: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   textArea: JTextArea [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   timeLimitField: JTextField [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ refresh(currentTime: int, waitingClients: String, queues: List&lt;Queues&gt;): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_74517257 { 
+   	label=Model
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Client74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Client</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   arrivalTime: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   serviceTime: int [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Queues74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Queues</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   clients: BlockingQueue&lt;Client&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   waitingPeriod: AtomicInteger [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addClient(newClient: Client)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ run()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+ConcreteStrategyQueue67388241 -> Queues74517257[label="addClient() -> addClient()"];
+ConcreteStrategyTime67388241 -> Queues74517257[label="addClient() -> addClient()"];
+Scheduler67388241 -> ConcreteStrategyQueue67388241[arrowhead=none];
+Scheduler67388241 -> ConcreteStrategyTime67388241[arrowhead=none];
+Scheduler67388241 -> Queues74517257[label="queues
+[0..*]"];
+SimulationManager67388241 -> Client74517257[label="generatedClients
+[0..*]"];
+SimulationManager67388241 -> Scheduler67388241[label="scheduler
+[0..1]"];
+SimulationManager67388241 -> SelectionPolicy67388241[label="selectionPolicy
+[0..1]"];
+SimulationManager67388241 -> SimulationFrame70939[label="frame
+[0..1]"];
+    
+}
+@enduml
